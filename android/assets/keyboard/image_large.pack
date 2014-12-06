@@ -1,0 +1,54 @@
+
+image_large.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+default_icon_go
+  rotate: false
+  xy: 1, 63
+  size: 82, 84
+  orig: 82, 84
+  offset: 0, 0
+  index: -1
+default_icon_search
+  rotate: false
+  xy: 85, 73
+  size: 72, 74
+  orig: 72, 74
+  offset: 0, 0
+  index: -1
+default_icon_enter
+  rotate: false
+  xy: 1, 1
+  size: 85, 60
+  orig: 85, 60
+  offset: 0, 0
+  index: -1
+default_icon_delete
+  rotate: false
+  xy: 159, 101
+  size: 82, 46
+  orig: 82, 46
+  offset: 0, 0
+  index: -1
+default_icon_shift_active
+  rotate: false
+  xy: 88, 11
+  size: 68, 60
+  orig: 68, 60
+  offset: 0, 0
+  index: -1
+default_icon_shift_inactive
+  rotate: false
+  xy: 159, 39
+  size: 68, 60
+  orig: 68, 60
+  offset: 0, 0
+  index: -1
+default_icon_arrow_down
+  rotate: false
+  xy: 158, 11
+  size: 44, 26
+  orig: 44, 26
+  offset: 0, 0
+  index: -1

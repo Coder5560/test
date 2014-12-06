@@ -1,0 +1,109 @@
+
+image.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+background
+  rotate: false
+  xy: 1, 48
+  size: 14, 402
+  orig: 14, 402
+  offset: 0, 0
+  index: -1
+default_icon_shift_active
+  rotate: false
+  xy: 1, 1
+  size: 51, 45
+  orig: 51, 45
+  offset: 0, 0
+  index: -1
+default_icon_enter
+  rotate: false
+  xy: 17, 406
+  size: 65, 44
+  orig: 65, 44
+  offset: 0, 0
+  index: -1
+default_icon_go
+  rotate: false
+  xy: 17, 341
+  size: 62, 63
+  orig: 62, 63
+  offset: 0, 0
+  index: -1
+default_icon_delete
+  rotate: false
+  xy: 17, 304
+  size: 62, 35
+  orig: 62, 35
+  offset: 0, 0
+  index: -1
+default_icon_search
+  rotate: false
+  xy: 17, 246
+  size: 54, 56
+  orig: 54, 56
+  offset: 0, 0
+  index: -1
+default_icon_shift_inactive
+  rotate: false
+  xy: 17, 199
+  size: 51, 45
+  orig: 51, 45
+  offset: 0, 0
+  index: -1
+default_btn_keyboard_key_normal
+  rotate: false
+  xy: 17, 125
+  size: 48, 72
+  split: 8, 8, 10, 10
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+default_btn_keyboard_key_pressed
+  rotate: false
+  xy: 17, 51
+  size: 48, 72
+  split: 8, 9, 10, 10
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+default_btn_popup_key
+  rotate: false
+  xy: 67, 125
+  size: 48, 72
+  split: 8, 8, 10, 10
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+default_btn_special_key_normal
+  rotate: false
+  xy: 73, 230
+  size: 48, 72
+  split: 8, 9, 10, 10
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+default_icon_arrow_down
+  rotate: false
+  xy: 70, 208
+  size: 34, 20
+  orig: 34, 20
+  offset: 0, 0
+  index: -1
+default_btn_special_key_pressed
+  rotate: false
+  xy: 67, 51
+  size: 48, 72
+  split: 8, 8, 10, 10
+  orig: 48, 72
+  offset: 0, 0
+  index: -1
+edit_text
+  rotate: false
+  xy: 54, 8
+  size: 19, 41
+  split: 4, 4, 5, 5
+  orig: 19, 41
+  offset: 0, 0
+  index: -1
