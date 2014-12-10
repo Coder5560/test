@@ -1,12 +1,10 @@
 package com.coder5560.game.views;
 
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Interpolation.Bounce;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.coder5560.game.enums.AnimationType;
 import com.coder5560.game.enums.ViewState;
 import com.coder5560.game.listener.OnCompleteListener;
 
@@ -43,79 +41,31 @@ public class View extends Table implements IViews {
 		this.name = viewName;
 		setBounds(bound.x, bound.y, bound.width, bound.height);
 		setClip(true);
-		setCullingArea(bound);
 		setTouchable(Touchable.enabled);
 		_viewController = viewController;
 		stage.addActor(this);
+		viewController.addView(this);
 	}
 
 	@Override
-	public void show(AnimationType newViewAnimation,
-			AnimationType oldViewAnimationType,
-			OnCompleteListener newViewCompleteListener,
-			OnCompleteListener oldViewCompleteListener) {
-		// if (newViewAnimation == AnimationType.NONE
-		// && oldViewAnimationType == AnimationType.NONE) {
-		// if (newViewCompleteListener != null)
-		// newViewCompleteListener.onComplete();
-		// if (oldViewCompleteListener != null)
-		// oldViewCompleteListener.onComplete();
-		// }
-		show();
-	}
-
-	@Override
-	public void show(AnimationType newViewAnimation,
-			OnCompleteListener newViewCompleteListener) {
-		// if (newViewAnimation == AnimationType.NONE) {
-		// if (newViewCompleteListener != null)
-		// newViewCompleteListener.onComplete();
-		// }
-		show();
-	}
-
-	@Override
-	public void hide(AnimationType newViewAnimation,
-			AnimationType oldViewAnimationType,
-			OnCompleteListener newViewCompleteListener,
-			OnCompleteListener oldViewCompleteListener) {
-		// if (newViewAnimation == AnimationType.NONE
-		// && oldViewAnimationType == AnimationType.NONE) {
-		// if (newViewCompleteListener != null)
-		// newViewCompleteListener.onComplete();
-		// if (oldViewCompleteListener != null)
-		// oldViewCompleteListener.onComplete();
-		// }
-		hide();
-	}
-
-	@Override
-	public void hide(AnimationType newViewAnimation,
-			OnCompleteListener newViewCompleteListener) {
-		// if (newViewAnimation == AnimationType.NONE) {
-		// if (newViewCompleteListener != null)
-		// newViewCompleteListener.onComplete();
-		// }
-		hide();
-	}
-
-	@Override
-	public void show() {
+	public void show(OnCompleteListener listener) {
 		_viewController.setCurrentView(this);
 		toFront();
 		setTouchable(Touchable.enabled);
 		setViewState(ViewState.SHOW);
+		if (listener != null)
+			listener.done();
 	}
 
 	@Override
-	public void hide() {
+	public void hide(OnCompleteListener listener) {
 		setViewState(ViewState.HIDE);
 		setTouchable(Touchable.disabled);
 		TraceView.instance.removeView(this.getName());
 	}
 
 	@Override
-	public void update() {
+	public void update(float delta) {
 
 	}
 
@@ -170,6 +120,6 @@ public class View extends Table implements IViews {
 	@Override
 	public void back() {
 		// TraceSystem.backView();
-		hide();
+		hide(null);
 	}
 }

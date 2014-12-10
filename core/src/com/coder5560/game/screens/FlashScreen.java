@@ -6,8 +6,6 @@ import utils.screen.GameCore;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -72,22 +70,11 @@ public class FlashScreen extends AbstractGameScreen {
 			switchScreen();
 		}
 		super.render(delta);
-	}
-
-	@Override
-	public void drawBatch(SpriteBatch batch) {
-		if (!loaded) {
+		batch.setProjectionMatrix(camera.combined);
+		batch.begin();
+		if (!loaded)
 			sprite.draw(batch);
-		}
-	}
-
-	@Override
-	public void drawShapeLine(ShapeRenderer shapeRenderer) {
-	}
-
-	@Override
-	public void drawShapeFill(ShapeRenderer shapeRenderer) {
-
+		batch.end();
 	}
 
 	void buildComponent(Stage stage) {

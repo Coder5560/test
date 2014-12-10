@@ -1,14 +1,19 @@
 package com.coder5560.game.views;
 
+import imp.view.HomeView;
+import imp.view.MainMenu;
+import imp.view.TopBarView;
+import utils.factory.StringSystem;
 import utils.networks.FacebookConnector;
 import utils.screen.GameCore;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.utils.Array;
-import com.coder5560.game.enums.AnimationType;
+import com.coder5560.game.enums.Constants;
 import com.coder5560.game.enums.ViewState;
+import com.coder5560.game.screens.GameScreen;
 
 public class ViewController implements IViewController {
 	public Stage				stage;
@@ -17,25 +22,44 @@ public class ViewController implements IViewController {
 	public IViews				currentView;
 	public FacebookConnector	facebookConnector;
 	private GameCore			_gameParent;
+	private GameScreen			_gameScreen;
 
-	public ViewController(GameCore _gameParent) {
+	public ViewController(GameCore _gameParent, GameScreen gameScreen) {
 		super();
 		this._gameParent = _gameParent;
-	}
-
-	@Override
-	public void update(float delta) {
-		for (IViews view : views) {
-			view.update();
-			if (view.getViewState() == ViewState.DISPOSE) {
-				removeView(view.getName());
-			}
-		}
+		this._gameScreen = gameScreen;
 	}
 
 	public void build(Stage stage) {
 		this.stage = stage;
 		views = new Array<IViews>();
+		HomeView homeView = new HomeView();
+		homeView.build(getStage(), this, StringSystem.VIEW_HOME, new Rectangle(
+				0, 0, Constants.WIDTH_SCREEN, Constants.HEIGHT_SCREEN));
+		homeView.buildComponent().show(null);
+
+		TopBarView topBarView = new TopBarView();
+		topBarView.build(getStage(), this, StringSystem.VIEW_ACTION_BAR,
+				new Rectangle(0, Constants.HEIGHT_SCREEN
+						- Constants.HEIGHT_ACTIONBAR, Constants.WIDTH_SCREEN,
+						Constants.HEIGHT_ACTIONBAR));
+		topBarView.buildComponent().show(null);
+
+		MainMenu mainMenu = new MainMenu();
+		mainMenu.build(getStage(), this, StringSystem.VIEW_MAIN_MENU,
+				new Rectangle(0, 0, Constants.WIDTH_SCREEN,
+						Constants.HEIGHT_SCREEN));
+		mainMenu.buildComponent().show(null);
+	}
+
+	@Override
+	public void update(float delta) {
+		for (IViews view : views) {
+			view.update(delta);
+			if (view.getViewState() == ViewState.DISPOSE) {
+				removeView(view.getName());
+			}
+		}
 	}
 
 	@Override
@@ -47,44 +71,6 @@ public class ViewController implements IViewController {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public void focusView(String name) {
-		if (!isContainView(name)) {
-			return;
-		}
-
-		IViews view = getView(name);
-		if (view != null) {
-			if (currentView != null) {
-				this.currentView.hide();
-				((Actor) currentView).setTouchable(Touchable.disabled);
-			}
-			view.show();
-			((Actor) view).setTouchable(Touchable.childrenOnly);
-			((Actor) view).toFront();
-			this.currentView = view;
-		}
-	}
-
-	@Override
-	public void focusView(String name, AnimationType animationType) {
-
-		if (!isContainView(name)) {
-			return;
-		}
-		IViews view = getView(name);
-		if (view != null) {
-			if (currentView != null) {
-				this.currentView.hide(AnimationType.NONE, null);
-				((Actor) currentView).setTouchable(Touchable.disabled);
-			}
-			view.show(animationType, null);
-			((Actor) view).setTouchable(Touchable.childrenOnly);
-			((Actor) view).toFront();
-			this.currentView = view;
-		}
 	}
 
 	@Override
@@ -104,15 +90,6 @@ public class ViewController implements IViewController {
 		view.destroyComponent();
 		views.removeValue(view, false);
 		stage.getActors().removeValue((Actor) view, true);
-	}
-
-	@Override
-	public void hideView(String name) {
-		if (!avaiable())
-			return;
-		IViews view = getView(name);
-		if (view != null)
-			view.hide(AnimationType.NONE, null);
 	}
 
 	// return the first view has name equal "name" in this container of views
@@ -178,6 +155,11 @@ public class ViewController implements IViewController {
 	public void setCurrentView(IViews view) {
 		this.currentView = view;
 		TraceView.instance.addViewToTrace(view.getName());
+	}
+
+	@Override
+	public GameScreen getGameScreen() {
+		return _gameScreen;
 	}
 
 }

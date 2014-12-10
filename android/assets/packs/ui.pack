@@ -1,52 +1,81 @@
+
 ui.png
 format: RGBA8888
-filter: Nearest,Nearest
+filter: Linear,Linear
 repeat: none
-button
-  rotate: false
-  xy: 1, 103
-  size: 900, 150
-  orig: 900, 150
-  offset: 0, 0
-  index: -1
 ninepatch_stock
   rotate: false
-  xy: 1, 1
+  xy: 1, 27
   size: 200, 100
   orig: 200, 100
   offset: 0, 0
   index: -1
 ninepatch_outline
   rotate: false
-  xy: 203, 1
+  xy: 203, 27
   size: 200, 100
   orig: 200, 100
   offset: 0, 0
   index: -1
 ninepatch_shadow_bottom
   rotate: false
-  xy: 405, 1
+  xy: 405, 27
   size: 200, 100
   orig: 200, 100
   offset: 0, 0
   index: -1
 ninepatch_rounded
   rotate: false
-  xy: 607, 1
+  xy: 607, 27
   size: 200, 100
   orig: 200, 100
   offset: 0, 0
   index: -1
+icono_page
+  rotate: false
+  xy: 809, 63
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
 back
   rotate: false
-  xy: 903, 193
+  xy: 809, 1
   size: 60, 60
   orig: 60, 60
   offset: 0, 0
   index: -1
+icono_info
+  rotate: false
+  xy: 875, 63
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+icono_setting
+  rotate: false
+  xy: 941, 63
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+icon-search
+  rotate: false
+  xy: 871, 11
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
+icon_submenu
+  rotate: false
+  xy: 923, 11
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
 ninepatch_none
   rotate: false
-  xy: 809, 61
+  xy: 975, 21
   size: 40, 40
   orig: 40, 40
   offset: 0, 0

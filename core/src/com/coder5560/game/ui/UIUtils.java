@@ -22,6 +22,26 @@ import com.coder5560.game.assets.Assets;
 import com.coder5560.game.listener.OnClickListener;
 
 public class UIUtils {
+	private static BitmapFont	font;
+
+	public static LabelStyle getLabelStyle(Color color) {
+		if (font == null)
+			font = Assets.instance.fontFactory.getRegular20();
+		LabelStyle style = new LabelStyle();
+		style.font = font;
+		style.fontColor = color;
+		return style;
+	}
+
+	public static Label getLabel(String text, Color color) {
+		if (font == null)
+			font = Assets.instance.fontFactory.getRegular20();
+		LabelStyle style = new LabelStyle();
+		style.font = font;
+		style.fontColor = color;
+		Label label = new Label(text, style);
+		return label;
+	}
 
 	public static NinePatchDrawable getDrawable(TextureRegion region, int left,
 			int right, int top, int bottom, Color color) {

@@ -2,7 +2,6 @@ package com.coder5560.game.views;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.coder5560.game.enums.AnimationType;
 import com.coder5560.game.enums.ViewState;
 import com.coder5560.game.listener.OnCompleteListener;
 
@@ -15,56 +14,17 @@ public interface IViews {
 			String viewName, Rectangle viewBound);
 
 	/* this method is call when we need to update all actor in this view */
-	public void update();
+	public void update(float delta);
 
-	/*
-	 * this method will be called by another view. on listener will must set the
-	 * view state for this one or it will be do nothing automatically just as :
-	 * 
-	 * - enable input
-	 * 
-	 * - stop transition
-	 * 
-	 * - .....
-	 */
-	public void show(AnimationType newViewAnimation,
-			AnimationType oldViewAnimationType,
-			OnCompleteListener newViewCompleteListener,
-			OnCompleteListener oldViewCompleteListener);
-
-	/*
-	 * this method will be called by another view. on listener will must set the
-	 * view state for this one or it will be do nothing automatically just as :
-	 * 
-	 * - enable input
-	 * 
-	 * - stop transition
-	 * 
-	 * - .....
-	 */
-	public void show(AnimationType newViewAnimation,
-			OnCompleteListener newViewCompleteListener);
+	public void show(OnCompleteListener listener);
 
 	/*
 	 * this method will be called by controller. on listener will must set the
 	 * view state for this one. or it will be set "HIDE" automatically
 	 */
-	public void hide(AnimationType newViewAnimation,
-			AnimationType oldViewAnimationType,
-			OnCompleteListener newViewCompleteListener,
-			OnCompleteListener oldViewCompleteListener);
-
-	/*
-	 * this method will be called by another view. on listener will must set the
-	 * view state for this one. or it will be set "HIDE" automatically
-	 */
-	public void hide(AnimationType newViewAnimation,
-			OnCompleteListener newViewCompleteListener);
-
-	public void show();
-
-	public void hide();
-
+	
+	public void hide(OnCompleteListener listener);
+	
 	public void setViewState(ViewState state);
 
 	public ViewState getViewState();

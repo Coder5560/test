@@ -13,30 +13,25 @@ import com.coder5560.game.listener.OnCompleteListener;
 import com.coder5560.game.ui.UIUtils;
 import com.coder5560.game.views.View;
 
-public class HomeView extends View {
+public class TopBarView extends View {
 	GalleryViewHorizontal	galleryViewHorizontal;
-	GalleryViewHorizontal	galleryTopBar;
-	public HomeView() {
+
+	public TopBarView() {
 	}
 
-	public HomeView buildComponent() {
-//		Table tbContent = new Table();
-//		tbContent.setSize(Constants.WIDTH_SCREEN, Constants.HEIGHT_SCREEN - Constants.HEIGHT_ACTIONBAR);
-//
-//		Table tbTopBar = new Table();
-//		tbContent.setSize(Constants.WIDTH_SCREEN, Constants.HEIGHT_SCREEN - Constants.HEIGHT_ACTIONBAR);
-		
-		
-		
-		galleryViewHorizontal = new GalleryViewHorizontal(this, 1);
+	public TopBarView buildComponent() {
+		setBackground(new NinePatchDrawable(new NinePatch(
+				Assets.instance.ui.reg_ninepatch, Color.GRAY)));
+		galleryViewHorizontal = new GalleryViewHorizontal(this, 4);
 		for (int i = 0; i < 10; i++) {
 			Table page = galleryViewHorizontal.newPage();
 			page.setBackground(new NinePatchDrawable(new NinePatch(
-					Assets.instance.ui.reg_ninepatch)));
-			Label lb = UIUtils.getLabel("View " + (i + 1), Color.BLACK);
+					Assets.instance.ui.reg_ninepatch, Color.RED)));
+			Label lb = UIUtils.getLabel("Tab " + (i + 1), Color.WHITE);
 			lb.setAlignment(Align.center);
 			page.add(lb).expand().fill().center();
 		}
+
 		return this;
 	}
 

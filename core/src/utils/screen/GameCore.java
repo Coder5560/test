@@ -25,7 +25,6 @@ public abstract class GameCore implements ApplicationListener {
 	public PlatformResolver		flatformResolver;
 	public FacebookConnector	facebookConnector;
 	public InputMultiplexer		inputMultiplexer;
-
 	@Override
 	public void create() {
 		ImageDownloader.getInstance().setGameCore(this);
@@ -35,7 +34,8 @@ public abstract class GameCore implements ApplicationListener {
 		setScreen(screen, null);
 	}
 
-	public void setScreen(AbstractGameScreen screen, ScreenTransition screenTransition) {
+	public void setScreen(AbstractGameScreen screen,
+			ScreenTransition screenTransition) {
 		int w = Gdx.graphics.getWidth();
 		int h = Gdx.graphics.getHeight();
 		if (!this.init) {
@@ -76,7 +76,8 @@ public abstract class GameCore implements ApplicationListener {
 				}
 				this.nextScreen.resume();
 
-				Gdx.input.setInputProcessor(this.nextScreen.getInputProcessor());
+				Gdx.input
+						.setInputProcessor(this.nextScreen.getInputProcessor());
 
 				this.currScreen = this.nextScreen;
 				this.nextScreen = null;
@@ -92,7 +93,9 @@ public abstract class GameCore implements ApplicationListener {
 				this.nextFbo.end();
 
 				float alpha = this.t / duration;
-				this.screenTransition.render(this.batch, this.currFbo.getColorBufferTexture(), this.nextFbo.getColorBufferTexture(), alpha);
+				this.screenTransition.render(this.batch,
+						this.currFbo.getColorBufferTexture(),
+						this.nextFbo.getColorBufferTexture(), alpha);
 			}
 		}
 	}

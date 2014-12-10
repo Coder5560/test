@@ -9,8 +9,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.input.GestureDetector.GestureListener;
 import com.badlogic.gdx.math.Vector2;
@@ -27,8 +25,6 @@ public abstract class AbstractGameScreen implements Screen, InputProcessor,
 	public OrthographicCamera		camera;
 	public SpriteBatch				batch;
 	public Stage					stage;
-	public static ShapeRenderer		shapeRenderer;
-	public Vector2					touchPoint;
 	public GameState				gameState;
 	public static VirtualKeyboard	keyboard;
 
@@ -39,7 +35,6 @@ public abstract class AbstractGameScreen implements Screen, InputProcessor,
 	public abstract void resize(int width, int height);
 
 	public void show() {
-		// parent.create();
 		gameState = GameState.INITIAL;
 		camera = new OrthographicCamera(Constants.WIDTH_SCREEN,
 				Constants.HEIGHT_SCREEN);
@@ -47,10 +42,8 @@ public abstract class AbstractGameScreen implements Screen, InputProcessor,
 				Constants.HEIGHT_SCREEN, camera);
 		stage = new Stage(viewport);
 		batch = new SpriteBatch();
-		shapeRenderer = new ShapeRenderer();
-		touchPoint = new Vector2();
 		keyboard = new VirtualKeyboard(batch);
-		
+
 		parent.inputMultiplexer = new InputMultiplexer(this, keyboard, stage,
 				new GestureDetector(this));
 		Gdx.input.setInputProcessor(getInputProcessor());
@@ -63,32 +56,12 @@ public abstract class AbstractGameScreen implements Screen, InputProcessor,
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		update(delta);
 
-		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
-		drawBatch(batch);
-		batch.end();
-
-		shapeRenderer.setProjectionMatrix(camera.combined);
-		shapeRenderer.begin(ShapeType.Line);
-		drawShapeLine(shapeRenderer);
-		shapeRenderer.end();
-
-		shapeRenderer.begin(ShapeType.Filled);
-		drawShapeFill(shapeRenderer);
-		shapeRenderer.end();
-
 		stage.act(delta);
 		stage.draw();
 
 		keyboard.update(delta);
 		keyboard.draw();
 	}
-
-	public abstract void drawBatch(SpriteBatch batch);
-
-	public abstract void drawShapeLine(ShapeRenderer shapeRenderer);
-
-	public abstract void drawShapeFill(ShapeRenderer shapeRenderer);
 
 	public void pause() {
 	}
@@ -107,7 +80,6 @@ public abstract class AbstractGameScreen implements Screen, InputProcessor,
 		keyboard.dispose();
 		stage.dispose();
 		batch.dispose();
-		shapeRenderer.dispose();
 	}
 
 	public void switchScreen(AbstractGameScreen screen,

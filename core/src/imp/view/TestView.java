@@ -6,7 +6,7 @@ import utils.factory.StringSystem;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.coder5560.game.enums.Constants;
+import com.coder5560.game.listener.OnCompleteListener;
 import com.coder5560.game.listener.OnResponseListener;
 import com.coder5560.game.ui.DialogInput;
 import com.coder5560.game.views.IViewController;
@@ -40,22 +40,22 @@ public class TestView extends View {
 
 					}
 				});
-		input.show();
+		input.show(null);
 	}
 
 	@Override
-	public void show() {
-		super.show();
+	public void show(OnCompleteListener listener) {
+		super.show(null);
 	}
 
 	@Override
-	public void hide() {
-		super.hide();
+	public void hide(OnCompleteListener listener) {
+		super.hide(null);
 	}
 
 	@Override
-	public void update() {
-		super.update();
+	public void update(float delta) {
+		super.update(delta);
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class TestView extends View {
 
 	@Override
 	public void back() {
-		hide();
+		hide(null);
 	}
 
 }

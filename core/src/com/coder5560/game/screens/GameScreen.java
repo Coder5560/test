@@ -6,19 +6,19 @@ import utils.screen.AbstractGameScreen;
 import utils.screen.GameCore;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.coder5560.game.enums.Constants;
 import com.coder5560.game.views.TraceView;
 import com.coder5560.game.views.ViewController;
 
 public class GameScreen extends AbstractGameScreen {
-	ViewController	controller;
-	Image			flash;
+	ViewController			controller;
+	Image					flash;
+	public GestureDetector	gestureDetector;
 
 	public GameScreen(GameCore game) {
 		super(game);
@@ -27,7 +27,7 @@ public class GameScreen extends AbstractGameScreen {
 	@Override
 	public void show() {
 		super.show();
-		controller = new ViewController(parent);
+		controller = new ViewController(parent, this);
 		controller.build(stage);
 		controller.setFacebookConnector(parent.facebookConnector);
 		Gdx.input.setCatchBackKey(true);
@@ -50,20 +50,6 @@ public class GameScreen extends AbstractGameScreen {
 				isExit = false;
 			}
 		}
-
-	}
-
-	@Override
-	public void drawBatch(SpriteBatch batch) {
-
-	}
-
-	@Override
-	public void drawShapeLine(ShapeRenderer shapeRenderer) {
-	}
-
-	@Override
-	public void drawShapeFill(ShapeRenderer shapeRenderer) {
 
 	}
 
@@ -96,31 +82,17 @@ public class GameScreen extends AbstractGameScreen {
 		}
 		if (keycode == Keys.NUM_4) {
 		}
+		if (keycode == Keys.A) {
+			controller.getView(StringSystem.VIEW_MAIN_MENU).show(null);
+		}
 		return false;
 	}
 
-	boolean	connect	= false;
-	float	offset	= 8;
-
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		viewport.unproject(touchPoint.set(screenX, screenY));
-		return false;
-	}
-
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		if (touchPoint.isZero())
-			return false;
-		Vector2 touchUp = new Vector2();
-		viewport.unproject(touchUp.set(screenX, screenY));
-		return false;
-	};
-
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		if (touchPoint.isZero())
-			return false;
-		return false;
+	public void setGestureDetector(GestureDetector detector) {
+		this.gestureDetector = detector;
+		parent.inputMultiplexer = new InputMultiplexer(detector, this,
+				keyboard, stage);
+		Gdx.input.setInputProcessor(parent.inputMultiplexer);
 	}
 
 }

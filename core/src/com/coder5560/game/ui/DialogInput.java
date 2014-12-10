@@ -24,6 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.coder5560.game.assets.Assets;
 import com.coder5560.game.listener.OnClickListener;
+import com.coder5560.game.listener.OnCompleteListener;
 import com.coder5560.game.listener.OnResponseListener;
 import com.coder5560.game.views.View;
 
@@ -46,7 +47,7 @@ public class DialogInput extends View {
 			public void clicked(InputEvent event, float x, float y) {
 				if (AbstractGameScreen.keyboard.isShowing())
 					AbstractGameScreen.keyboard.hide();
-				hide();
+				hide(null);
 				super.clicked(event, x, y);
 			}
 		});
@@ -111,23 +112,23 @@ public class DialogInput extends View {
 	}
 
 	@Override
-	public void show() {
+	public void show(OnCompleteListener listener) {
 		_viewController.addView(this);
-		super.show();
+		super.show(listener);
 		setVisible(true);
 	}
 
 	@Override
-	public void hide() {
-		super.hide();
+	public void hide(OnCompleteListener listener) {
+		super.hide(listener);
 		setVisible(false);
 		this.clear();
 		_viewController.removeView(getName());
 	}
 
 	@Override
-	public void update() {
-		super.update();
+	public void update(float delta) {
+		super.update(delta);
 	}
 
 	@Override
@@ -290,7 +291,7 @@ public class DialogInput extends View {
 																			.getText(),
 																			tfQuality
 																					.getText());
-															hide();
+															hide(null);
 														}
 
 													}
@@ -305,7 +306,7 @@ public class DialogInput extends View {
 																.isShowing())
 															AbstractGameScreen.keyboard
 																	.hide();
-														hide();
+														hide(null);
 													}
 												};
 }
